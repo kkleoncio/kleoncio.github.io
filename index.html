@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leoncio — UI/UX Designer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EE;
+    --ink: #1A1916;
+    --ink-muted: #5C5A54;
+    --ink-faint: #9C9A93;
+    --accent: #1D6B4E;
+    --accent-light: #E1F0EA;
+    --accent-mid: #4A9B78;
+    --warm: #C4763A;
+    --warm-light: #FBF0E6;
+    --border: rgba(26,25,22,0.12);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(247,244,238,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding-top: 80px;
+  }
+  .hero-left {
+    padding: 6rem 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 4vw, 3.75rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; align-items: center;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 0.875rem 2rem;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+    padding: 0.875rem 2rem;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--ink);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .hero-right {
+    background: var(--accent);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-right-inner {
+    padding: 4rem;
+    position: relative; z-index: 1;
+  }
+  .process-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(4px);
+    color: white;
+  }
+  .process-card-num {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .process-card-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+  .process-card-desc {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+  .hero-right-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 60%);
+  }
+
+  /* SECTION HEADERS */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-intro {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    max-width: 600px;
+    line-height: 1.75;
+  }
+
+  /* WORK PROCESS STRIP */
+  .process-strip {
+    background: var(--ink);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+  .process-step {
+    padding: 1.5rem 1.25rem;
+    border-right: 0.5px solid rgba(255,255,255,0.1);
+    color: white;
+  }
+  .process-step:last-child { border-right: none; }
+  .ps-icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.6;
+  }
+  .ps-num {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    opacity: 0.4;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .ps-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .ps-desc {
+    font-size: 0.75rem;
+    opacity: 0.55;
+    line-height: 1.5;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: flex; flex-direction: column; gap: 0; }
+  .project-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+    border-top: 0.5px solid var(--border);
+  }
+  .project-block:nth-child(even) { direction: rtl; }
+  .project-block:nth-child(even) > * { direction: ltr; }
+
+  .project-visual {
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pv-botika { background: linear-gradient(135deg, #FFE0EE 0%, #FBBCD8 100%); }
+  .pv-icarex { background: linear-gradient(135deg, #D6F0E8 0%, #9FE1CB 100%); }
+  .pv-donation { background: linear-gradient(135deg, #DDE8F5 0%, #B5D4F4 100%); }
+  .pv-sari { background: linear-gradient(135deg, #D6EDD6 0%, #A8D5A8 100%); }
+  .pv-farm { background: linear-gradient(135deg, #D6E8D0 0%, #8CB88A 100%); }
+  .pv-docu { background: linear-gradient(135deg, #E8EDD4 0%, #C7D49A 100%); }
+
+  .project-mockup-label {
+    position: absolute;
+    bottom: 1.5rem; left: 1.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.35);
+  }
+
+  .project-info {
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .project-tag {
+    display: inline-flex; gap: 0.5rem; flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.6rem;
+    border: 0.5px solid var(--border);
+    color: var(--ink-muted);
+    background: white;
+  }
+  .tag-green {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: var(--accent-mid);
+  }
+  h3 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+  .process-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2rem;
+    border: 0.5px solid var(--border);
+    background: white;
+  }
+  .ph-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .ph-row:last-child { border-bottom: none; }
+  .ph-label {
+    padding: 0.875rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: #FAFAF8;
+    border-right: 0.5px solid var(--border);
+  }
+  .ph-value {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+  .project-link {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    border-bottom: 1px solid var(--accent-mid);
+    padding-bottom: 1px;
+  }
+  .project-link:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ABOUT */
+  .about-section {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-left { position: sticky; top: 6rem; }
+  .about-portrait {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--accent-light);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .portrait-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  .portrait-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-family: var(--serif);
+  }
+  .about-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .about-title-small {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+  .about-right { padding-top: 0.5rem; }
+  .about-body {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 0.5px solid var(--border);
+    margin-bottom: 2rem;
+    background: white;
+  }
+  .skill-cell {
+    padding: 1rem 1.25rem;
+    border-right: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .skill-cell:nth-child(even) { border-right: none; }
+  .skill-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .skill-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.5rem;
+  }
+  .skill-items {
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  /* FOOTER / CTA */
+  .footer-cta {
+    background: var(--ink);
+    color: white;
+    padding: 6rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-cta h2 {
+    color: white;
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    max-width: 500px;
+  }
+  .footer-cta h2 em { color: var(--accent-mid); }
+  .footer-right { text-align: right; }
+  .footer-contact-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+  }
+  .footer-email {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: white;
+    text-decoration: none;
+  }
+  .footer-email:hover { color: var(--accent-mid); }
+  footer {
+    background: var(--ink);
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+  /* PHONE MOCKUP SVG */
+  .phone-frame {
+    width: 160px; height: 280px;
+    background: white;
+    border-radius: 22px;
+    border: 2px solid rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+  .phone-notch {
+    width: 50px; height: 10px;
+    background: rgba(0,0,0,0.12);
+    border-radius: 0 0 8px 8px;
+    margin: 6px auto;
+  }
+  .phone-screen-content {
+    padding: 4px 6px;
+  }
+  .psc-header {
+    height: 10px;
+    background: currentColor;
+    border-radius: 2px;
+    margin-bottom: 4px;
+    opacity: 0.8;
+  }
+  .psc-bar { height: 6px; background: currentColor; border-radius: 2px; margin-bottom: 3px; opacity: 0.15; }
+  .psc-bar.wide { width: 90%; }
+  .psc-bar.mid { width: 65%; }
+  .psc-bar.short { width: 40%; }
+  .psc-card-row { display: flex; gap: 4px; margin: 6px 0; }
+  .psc-card {
+    flex: 1; height: 36px; border-radius: 5px;
+    background: currentColor; opacity: 0.1;
+  }
+  .psc-card.accent { opacity: 0.25; }
+
+  /* Laptop mockup */
+  .laptop-wrap {
+    position: relative; padding-bottom: 16px;
+  }
+  .laptop-screen {
+    width: 240px; height: 150px;
+    background: white;
+    border-radius: 6px 6px 0 0;
+    border: 2px solid rgba(0,0,0,0.15);
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+  .ls-topbar {
+    height: 16px; background: #F0F0F0;
+    display: flex; align-items: center; padding: 0 6px; gap: 3px;
+  }
+  .ls-dot { width: 4px; height: 4px; border-radius: 50%; }
+  .ls-content { padding: 8px; }
+  .laptop-base {
+    width: 270px; height: 10px;
+    background: rgba(0,0,0,0.12);
+    border-radius: 0 0 4px 4px;
+    margin: 0 auto;
+  }
+
+  /* Animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.6s ease both; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">KLeoncio</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <p class="hero-tag">UI/UX Designer · 3+ Years Experience</p>
+    <h1>Designing <em>experiences</em> users understand and trust</h1>
+    <p class="hero-desc">
+      I translate complex user needs and business goals into clear, intuitive digital experiences — from research and wireframes through to high-fidelity delivery. Available for US Pacific hours (remote).
+    </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View Case Studies</a>
+      <a href="mailto:217kathleen@gmail.com" class="btn-outline">Get in touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">6</span>
+        <span class="stat-label">End-to-end projects</span>
+      </div>
+      <div>
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Years in UX/UI</span>
+      </div>
+      <div>
+        <span class="stat-num">4</span>
+        <span class="stat-label">Teams led</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-right-inner">
+      <div class="process-card">
+        <div class="process-card-num">01 — DISCOVERY</div>
+        <div class="process-card-title">Research & Insights</div>
+        <div class="process-card-desc">User interviews · Surveys · Usability testing · Behavioral analysis</div>
+      </div>
+      <div class="process-card">
+        <div class="process-card-num">02 — STRUCTURE</div>
+        <div class="process-card-title">Architecture & Flows</div>
+        <div class="process-card-desc">Information architecture · User flows · Sitemaps · Wireframes</div>
+      </div>
+      <div class="process-card">
+        <div class="process-card-num">03 — PROTOTYPE</div>
+        <div class="process-card-title">Rapid Iteration</div>
+        <div class="process-card-desc">Interactive prototypes · Stakeholder reviews · Usability cycles</div>
+      </div>
+      <div class="process-card" style="margin-bottom:0;">
+        <div class="process-card-num">04 — DELIVERY</div>
+        <div class="process-card-title">High-fidelity Execution</div>
+        <div class="process-card-desc">Design systems · Dev handoff · Accessibility · Iteration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS STRIP -->
+<div class="process-strip" id="process">
+  <div class="process-step">
+    <div class="ps-num">01</div>
+    <div class="ps-title">Discover</div>
+    <div class="ps-desc">Interviews, surveys, competitive analysis, and behavioral research</div>
+  </div>
+  <div class="process-step">
+    <div class="ps-num">02</div>
+    <div class="ps-title">Define</div>
+    <div class="ps-desc">Personas, problem statements, user flows, and IA</div>
+  </div>
+  <div class="process-step">
+    <div class="ps-num">03</div>
+    <div class="ps-title">Ideate</div>
+    <div class="ps-desc">Sketches, lo-fi wireframes, and design exploration</div>
+  </div>
+  <div class="process-step">
+    <div class="ps-num">04</div>
+    <div class="ps-title">Prototype</div>
+    <div class="ps-desc">Interactive prototypes and stakeholder testing</div>
+  </div>
+  <div class="process-step">
+    <div class="ps-num">05</div>
+    <div class="ps-title">Deliver</div>
+    <div class="ps-desc">High-fidelity UI, design system, and dev handoff</div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="work" style="padding: 5rem 0; background: var(--cream);">
+  <div style="padding: 0 3rem 3rem;">
+    <p class="section-label">Selected Work</p>
+    <h2>Case studies</h2>
+    <p class="section-intro">Each project reflects a full UX process — from understanding user problems to delivering tested, production-ready interfaces.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- BOTIKA -->
+    <div class="project-block">
+      <div class="project-visual pv-botika">
+        <!-- Phone mockup -->
+        <div style="display:flex; gap:20px; align-items:center;">
+           <img src="images/botika.png" alt="Botika UI" style="width:100%; max-width:500px;">
+        </div>
+        <div class="project-mockup-label">Botika · Mobile App</div>
+      </div>
+      <div class="project-info">
+        <div class="project-tag">
+          <span class="tag tag-green">Team Lead</span>
+          <span class="tag">Mobile App</span>
+          <span class="tag">Healthcare UX</span>
+          <span class="tag">Figma</span>
+        </div>
+        <h3>Botika — Pharmacy Management & Ordering System</h3>
+        <p class="project-desc">Led a team of 4 to design a mobile pharmacy app that simplifies complex medication ordering into intuitive, friction-free interactions for patients and pharmacy staff.</p>
+        <div class="process-highlights">
+          <div class="ph-row">
+            <div class="ph-label">Problem</div>
+            <div class="ph-value">Pharmacy ordering involved multi-step, error-prone manual processes; users struggled to navigate inventory and place orders efficiently.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Research</div>
+            <div class="ph-value">Conducted stakeholder interviews and task analysis to map pain points in the ordering journey; identified 6 critical drop-off points.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Process</div>
+            <div class="ph-value">Designed end-to-end user flows and wireframes; facilitated design reviews; balanced user needs against pharmacy business logic.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Outcome</div>
+            <div class="ph-value">Reduced ordering steps by ~40%; improved task completion clarity for first-time users through iterative wireframe testing.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ICAREX -->
+    <div class="project-block">
+      <div class="project-visual pv-icarex">
+         <img src="images/icarex.png" alt="ICarex UI" style="width:100%; max-width:500px;">
+        <div class="project-mockup-label">ICarex · Web Platform</div>
+      </div>
+      <div class="project-info">
+        <div class="project-tag">
+          <span class="tag tag-green">Frontend Lead</span>
+          <span class="tag">Web Platform</span>
+          <span class="tag">Alumni Tracking</span>
+          <span class="tag">Figma</span>
+        </div>
+        <h3>ICarex — Alumni Tracker & Relations Management</h3>
+        <p class="project-desc">Designed and led front-end development for a responsive alumni management platform for the Institute of Computer Science, enabling networking, mentorship, and career tracking in one hub.</p>
+        <div class="process-highlights">
+          <div class="ph-row">
+            <div class="ph-label">Problem</div>
+            <div class="ph-value">Alumni data was fragmented across spreadsheets; no central system for the institute to track employment, engagement, or communication.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Research</div>
+            <div class="ph-value">Interviewed institute staff and alumni to understand data needs, communication gaps, and feature priorities through structured interviews.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Process</div>
+            <div class="ph-value">Led mobile-responsive wireframing; collaborated on IA with client; ensured consistent branding and accessibility standards throughout.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Outcome</div>
+            <div class="ph-value">Delivered a production-deployed platform with verified alumni profiles, job board, and admin dashboard; coordinated multi-branch development.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SARI -->
+    <div class="project-block">
+      <div class="project-visual pv-sari">
+          <img src="images/sari.png" alt="SARI UI" style="width:100%; max-width:500px;">
+        <div class="project-mockup-label">SARI · Web App</div>
+      </div>
+      <div class="project-info">
+        <div class="project-tag">
+          <span class="tag tag-green">UX/UI Designer</span>
+          <span class="tag">Web App</span>
+          <span class="tag">Student Tool</span>
+          <span class="tag">Figma · React</span>
+        </div>
+        <h3>SARI — Student Meal Planner for UPLB</h3>
+        <p class="project-desc">Designed a budget-aware meal planning web app for university students, surfacing local food options and generating personalized meal combinations within a given daily budget.</p>
+        <div class="process-highlights">
+          <div class="ph-row">
+            <div class="ph-label">Problem</div>
+            <div class="ph-value">UPLB students struggled to make meal decisions within tight budgets without knowing which nearby canteens offered value for their allowance.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Research</div>
+            <div class="ph-value">Surveyed students on eating habits and budget constraints; mapped decision-making patterns through contextual inquiry on campus.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Process</div>
+            <div class="ph-value">Designed budget-input flow, personalized meal suggestions, and establishment listing; conducted usability tests with target student users.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Outcome</div>
+            <div class="ph-value">Deployed live at sari-web-app.vercel.app; users can generate daily meal plans in seconds based on real local food data.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DONATION -->
+    <div class="project-block">
+      <div class="project-visual pv-donation">
+          <img src="images/elgives.png" alt="Donation App UI" style="width:100%; max-width:500px;">
+        <div class="project-mockup-label">Donation App · Mobile</div>
+      </div>
+      <div class="project-info">
+        <div class="project-tag">
+          <span class="tag tag-green">UX/UI Designer</span>
+          <span class="tag">Mobile App</span>
+          <span class="tag">Non-profit</span>
+          <span class="tag">Flutter · Firebase</span>
+        </div>
+        <h3>Donation Management Mobile App</h3>
+        <p class="project-desc">Designed both donor and organization-facing flows for a donation platform supporting QR-based tracking, scheduling, and real-time notifications — bridging the gap between givers and non-profits.</p>
+        <div class="process-highlights">
+          <div class="ph-row">
+            <div class="ph-label">Problem</div>
+            <div class="ph-value">Donors had no visibility into how donations were used; organizations lacked a unified tool to manage donors, schedules, and statuses.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Research</div>
+            <div class="ph-value">Identified two distinct user types (donors vs. org admins) with conflicting mental models; designed separate but complementary flows for each.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Process</div>
+            <div class="ph-value">Designed 90% of UI including QR-based status flows, scheduling screens, and notification system; iterated based on stakeholder feedback.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Outcome</div>
+            <div class="ph-value">Dual-role app enabling transparent donation tracking, org verification, and real-time status updates across donor and org dashboards.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FARM2TABLE -->
+    <div class="project-block">
+      <div class="project-visual pv-farm">
+          <img src="images/farm2table.png" alt="Farm2Table UI" style="width:100%; max-width:500px;">
+        <div class="project-mockup-label">Farm2Table · E-commerce</div>
+      </div>
+      <div class="project-info">
+        <div class="project-tag">
+          <span class="tag tag-green">Team Lead</span>
+          <span class="tag">E-commerce</span>
+          <span class="tag">Web Platform</span>
+          <span class="tag">React · Node.js</span>
+        </div>
+        <h3>Farm2Table — Fresh Produce E-commerce Platform</h3>
+        <p class="project-desc">Led design and front-end for a dual-sided e-commerce platform connecting local farmers to consumers — including product browsing, cart, order management, and a merchant admin dashboard.</p>
+        <div class="process-highlights">
+          <div class="ph-row">
+            <div class="ph-label">Problem</div>
+            <div class="ph-value">Farmers lacked direct-to-consumer channels; buyers had no way to verify freshness or source of produce they ordered online.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Research</div>
+            <div class="ph-value">Mapped two user journeys (merchant vs. buyer); identified key trust signals needed at each stage of the purchasing funnel.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Process</div>
+            <div class="ph-value">Designed 95% of UI across customer-facing and admin views; optimized product listing IA and order fulfillment dashboard for efficiency.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Outcome</div>
+            <div class="ph-value">Full-stack deployed platform with intuitive dual-role experience; merchant dashboard reduced order management steps significantly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTOR -->
+    <div class="project-block">
+      <div class="project-visual pv-docu">
+          <img src="images/documentor.png" alt="DocuMentor UI" style="width:100%; max-width:500px;">
+        <div class="project-mockup-label">DocuMentor · Accessibility Tool</div>
+      </div>
+      <div class="project-info">
+        <div class="project-tag">
+          <span class="tag tag-green">UX/UI Designer</span>
+          <span class="tag">Accessibility</span>
+          <span class="tag">Gov-tech</span>
+          <span class="tag">Figma</span>
+        </div>
+        <h3>DocuMentor — Accessible Form Simplification Tool</h3>
+        <p class="project-desc">Designed a tool that scans complex PDF government forms and automatically converts them into simplified, guided, step-by-step interfaces — removing bureaucratic barriers for older adults and people with disabilities.</p>
+        <div class="process-highlights">
+          <div class="ph-row">
+            <div class="ph-label">Problem</div>
+            <div class="ph-value">Government and institutional online forms are inaccessible to older adults and users with disabilities due to complexity, dense layouts, and poor UX.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Research</div>
+            <div class="ph-value">Evaluated WCAG accessibility standards and conducted contextual research on how users with limited digital literacy interact with complex forms.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Process</div>
+            <div class="ph-value">Designed PDF scan-to-form transformation flow; applied progressive disclosure, plain language, and AI auto-fill features in the wireframe stage.</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-label">Outcome</div>
+            <div class="ph-value">Form completion time reduced significantly in user testing; participants rated the simplified interface as highly easier than the original PDF format.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background: white;">
+  <p class="section-label">About me</p>
+  <div class="about-section" style="margin-top: 2rem;">
+    <div class="about-left">
+      <div class="about-name">Kathleen Kate Leoncio</div>
+      <div class="about-title-small">UI/UX Designer · Available Remotely</div>
+    </div>
+    <div class="about-right">
+      <p class="about-body">
+        I'm a UI/UX designer with 3+ years of experience turning ambiguous problems into clear, user-centered digital products. My background spans mobile apps, web platforms, and accessibility-focused tools — always grounded in real research and tested with real users.
+      </p>
+      <p class="about-body">
+        I've led design teams, collaborated closely with developers, and managed projects from the first stakeholder interview through to shipped product. I'm comfortable working across the full product lifecycle — from discovery and wireframing to high-fidelity delivery and design system maintenance.
+      </p>
+      <p class="about-body" style="margin-bottom:2rem;">
+        I'm looking to bring that same rigour and care to meaningful real-estate digital experiences — designing tools that help people make one of the biggest decisions of their lives with clarity and confidence.
+      </p>
+
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <div class="skill-title">Design Tools</div>
+          <div class="skill-items">Figma · Adobe XD · Sketch<br> · FigJam</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-title">UX Methods</div>
+          <div class="skill-items">User interviews · Usability testing<br>IA · User flows · Wireframing</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-title">Front-end</div>
+          <div class="skill-items">HTML · CSS · React<br>Flutter · Responsive design</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-title">Collaboration</div>
+          <div class="skill-items">Team leadership · Dev handoff<br>Agile · Design systems · Git</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta" id="contact">
+  <div>
+    <p style="font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:0.75rem;">Ready to collaborate</p>
+    <h2>Let's build something <em>people love</em> to use.</h2>
+  </div>
+  <div class="footer-right">
+    <div class="footer-contact-label">Reach me at</div>
+    <a class="footer-email" href="mailto:217kathleen@gmail.com">217kathleen@gmail.com</a>
+    <div style="margin-top:1.5rem; display:flex; gap:1rem; justify-content:flex-end;">
+      <a href="https://github.com/kkleoncio" class="btn-outline" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.6);">Github ↗</a>
+
+    </div>
+  </div>
+</div>
+<footer>
+  <p>© 2026 Leoncio · UI/UX Designer</p>
+</footer>
+
+</body>
+</html>
